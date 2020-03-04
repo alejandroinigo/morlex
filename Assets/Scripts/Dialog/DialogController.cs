@@ -68,13 +68,13 @@ public class DialogController : MonoBehaviour
     };
     void Awake() {
         cognitiveService = (CognitiveService) ScriptableObject.CreateInstance("CognitiveService");
-	}
+    }
 
-	void Start() {
+    void Start() {
         consoleActions.Clear();
         DisplayConsoleText();
         lineNumberIndex = 0;
-	}
+    }
 
     public void ClearDisplay() {
         InitConsoleText();
@@ -189,25 +189,25 @@ public class DialogController : MonoBehaviour
     }
 
     void DisplayQuoteText()
-	{
+    {
         string logAsText = string.Join("\n", consoleActions.ToArray());
-		quoteDisplayText.text = logAsText;
-	}
+        quoteDisplayText.text = logAsText;
+    }
 
     void DisplayMissionText()
-	{
+    {
         string logAsText = string.Join("\n", consoleActions.ToArray());
-		missionDisplayText.text = logAsText;
-	}
+        missionDisplayText.text = logAsText;
+    }
 
     void DisplayConsoleText()
-	{
+    {
         string logAsText = string.Join("\n", consoleActions.ToArray());
-		consoleDisplayText.text = logAsText;
-	}
+        consoleDisplayText.text = logAsText;
+    }
 
     float RespondToInput(string userInput)
-	{
+    {
         Tuple<string, float> cognitiveResponse = cognitiveService.GetCognitiveResponse(userInput);
         LogStringWithReturn("> " + cognitiveResponse.Item1);
         return cognitiveResponse.Item2;
@@ -221,32 +221,32 @@ public class DialogController : MonoBehaviour
     }
 
     public void LogInputString(string userInput)
-	{
+    {
         if (!string.IsNullOrWhiteSpace(userInput)) {
             LogString("< " + userInput);
         }
-	}
+    }
 
-	public float ListenInputString(string userInput)
-	{
+    public float ListenInputString(string userInput)
+    {
         if (!string.IsNullOrWhiteSpace(userInput)) {
             userInput = userInput.ToLower();
             return RespondToInput(userInput);
         } else {
             return 0f;
         }
-	}
+    }
 
     void LogString(string stringToAdd)
-	{
+    {
         consoleActions.Dequeue();
         consoleActions.Enqueue(stringToAdd);
         DisplayConsoleText();
         actionLog.Add(stringToAdd);
-	}
+    }
 
     void LogStringWithReturn(string stringToAdd)
-	{
+    {
         consoleActions.Dequeue();
         consoleActions.Enqueue("");
         actionLog.Add(stringToAdd);
@@ -254,7 +254,7 @@ public class DialogController : MonoBehaviour
         consoleActions.Enqueue(stringToAdd);
         DisplayConsoleText();
         actionLog.Add(stringToAdd);
-	}
+    }
 
     public IEnumerator CommandDialog(CommandType commandType, int minSeconds, int maxSeconds, Action<bool> done) {
         int seconds = (int) UnityEngine.Random.Range(minSeconds, maxSeconds);

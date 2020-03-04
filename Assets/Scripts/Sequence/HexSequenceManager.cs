@@ -7,8 +7,8 @@ using UnityEngine.EventSystems;
 public class HexSequenceManager : MonoBehaviour
 {   
     enum Environment {
-		Demo, Development, Production
-	}
+        Demo, Development, Production
+    }
     enum Sequence {
         Intro, Mission, Orbit, Interaction, Cognitive, Hole, Cube, End
     }
@@ -116,8 +116,8 @@ public class HexSequenceManager : MonoBehaviour
     }
     
     void Awake() {
-		inputField.onEndEdit.AddListener(AcceptStringInput);
-	}
+        inputField.onEndEdit.AddListener(AcceptStringInput);
+    }
     
     void Start() {
         LoadConfiguration();
@@ -549,15 +549,15 @@ public class HexSequenceManager : MonoBehaviour
     }
 
     void AcceptStringInput(string userInput)
-	{
+    {
         if (IsDialogEnded()) {
             dialogController.LogInputString (userInput);
         } else {
             dialogController.LogInputString (userInput);
             StartCoroutine(ListenInputString (userInput, minDialogListenSeconds, maxDialogListenSeconds));
-	    }
+        }
         inputField.text = null;
-	}
+    }
 
     IEnumerator ListenInputString (string userInput, int minSeconds, int maxSeconds) {
         yield return new WaitForSeconds(UnityEngine.Random.Range(minSeconds, maxSeconds));

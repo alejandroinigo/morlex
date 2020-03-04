@@ -8,7 +8,7 @@ public class MainMenu : MonoBehaviour
     KeyCode menuKeyUp = KeyCode.UpArrow;
     KeyCode menuKeyDown = KeyCode.DownArrow;
     public Text[] textMenuList;
-	int activeTextMenu = 0;
+    int activeTextMenu = 0;
 
     void Awake() {
         activeTextMenu = 0;
@@ -21,7 +21,7 @@ public class MainMenu : MonoBehaviour
         } else {
             UpdateNotStartedGameMenu();
         }
-	}
+    }
 
     void UpdateNotStartedGameMenu() {
         if(creditsScreen) {
@@ -40,26 +40,26 @@ public class MainMenu : MonoBehaviour
     }
 
     public void HideMainMenu() {
-		gameObject.SetActive(false);
-	}
+        gameObject.SetActive(false);
+    }
 
     void QuitGame() {
         hexGame.QuitGame();
-	}
+    }
 
     public void ShowMainMenu() {
         gameObject.SetActive(true);
         gameObject.transform.Find("CreditsDisplayText").gameObject.SetActive(false);
         gameObject.transform.Find("Menu").gameObject.SetActive(true);
         creditsScreen = false;
-	}
+    }
 
     public void ShowCredits() {
         gameObject.SetActive(true);
         gameObject.transform.Find("CreditsDisplayText").gameObject.SetActive(true);
         gameObject.transform.Find("Menu").gameObject.SetActive(false);
         creditsScreen = true;
-	}
+    }
 
     public void ShowEnd() {
         hexGame.EndGame();
@@ -69,7 +69,7 @@ public class MainMenu : MonoBehaviour
         activeTextMenu = 0;
         SetTextMenuActive(activeTextMenu);
         creditsScreen = true;
-	}
+    }
 
     public void NewGame() {
         hexGame.GameStarted = false;

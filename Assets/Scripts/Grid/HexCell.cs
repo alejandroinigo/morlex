@@ -6,7 +6,7 @@ public class HexCell : MonoBehaviour
 {
     public HexCoordinates coordinates;
     public RectTransform uiRect;
-	public HexGridChunk chunk;
+    public HexGridChunk chunk;
     public HexCell PathFrom { get; set; }
     public int SearchHeuristic { get; set; }
     public HexCell NextWithSamePriority { get; set; }
@@ -15,11 +15,11 @@ public class HexCell : MonoBehaviour
 
     [SerializeField]
     HexCell[] neighbors = new HexCell[0];
-	int elevation = int.MinValue;
-	int terrainTypeIndex;
-	int waterLevel;
-	int firstDetailLevel, secondDetailLevel, thirdDetailLevel;
-	int specialIndex;
+    int elevation = int.MinValue;
+    int terrainTypeIndex;
+    int waterLevel;
+    int firstDetailLevel, secondDetailLevel, thirdDetailLevel;
+    int specialIndex;
     int distance;
     int visibility;
 
@@ -30,43 +30,43 @@ public class HexCell : MonoBehaviour
     }
 
     public bool IsVisible {
-		get {
-			return true;
-		}
-	}
+        get {
+            return true;
+        }
+    }
 
     public void SetLabel (string text) {
-		UnityEngine.UI.Text label = uiRect.GetComponent<Text>();
-		label.text = text;
-	}
+        UnityEngine.UI.Text label = uiRect.GetComponent<Text>();
+        label.text = text;
+    }
 
     public int Distance {
-		get {
-			return distance;
-		}
-		set {
-			distance = value;
-		}
-	}
+        get {
+            return distance;
+        }
+        set {
+            distance = value;
+        }
+    }
 
     public int SearchPriority {
-		get {
-			return distance + SearchHeuristic;
-		}
-	}
+        get {
+            return distance + SearchHeuristic;
+        }
+    }
 
     public int Elevation {
-		get {
-			return elevation;
-		}
-		set {
-			if (elevation == value) {
-				return;
-			}
-			elevation = value;
-			RefreshPosition();
-		}
-	}
+        get {
+            return elevation;
+        }
+        set {
+            if (elevation == value) {
+                return;
+            }
+            elevation = value;
+            RefreshPosition();
+        }
+    }
 
     void RaiseHeight() {
         Vector3 position = transform.localPosition;
@@ -89,166 +89,166 @@ public class HexCell : MonoBehaviour
     }
 
     public int ViewElevation {
-		get {
-			return elevation >= waterLevel ? elevation : waterLevel;
-		}
-	}
+        get {
+            return elevation >= waterLevel ? elevation : waterLevel;
+        }
+    }
 
-	void RefreshPosition () {
-			Vector3 position = transform.localPosition;
-			position.y = Height;
-			transform.localPosition = position;
+    void RefreshPosition () {
+            Vector3 position = transform.localPosition;
+            position.y = Height;
+            transform.localPosition = position;
 
             Vector3 uiPosition = uiRect.localPosition;
-			uiPosition.z = -Height;
-			uiRect.localPosition = uiPosition;
-	}
+            uiPosition.z = -Height;
+            uiRect.localPosition = uiPosition;
+    }
 
-	public int TerrainTypeIndex {
-		get {
-			return terrainTypeIndex;
-		}
-		set {
-			if (terrainTypeIndex != value) {
-				terrainTypeIndex = value;
-			}
-		}
-	}
-	
-	public int WaterLevel {
-		get {
-			return waterLevel;
-		}
-		set {
-			if (waterLevel == value) {
-				return;
-			}
-			waterLevel = value;
-			Refresh();
-		}
-	}
+    public int TerrainTypeIndex {
+        get {
+            return terrainTypeIndex;
+        }
+        set {
+            if (terrainTypeIndex != value) {
+                terrainTypeIndex = value;
+            }
+        }
+    }
+    
+    public int WaterLevel {
+        get {
+            return waterLevel;
+        }
+        set {
+            if (waterLevel == value) {
+                return;
+            }
+            waterLevel = value;
+            Refresh();
+        }
+    }
 
-	public bool IsUnderwater {
-		get {
-			return WaterSurfaceY > Height;
-		}
-	}
+    public bool IsUnderwater {
+        get {
+            return WaterSurfaceY > Height;
+        }
+    }
 
-	public float WaterSurfaceY {
-		get {
-			return
-				(waterLevel *
-				HexMetrics.elevationStep) + HexMetrics.waterElevationOffset;
-		}
-	}
-	
-	public int FirstDetailLevel {
-		get {
-			return firstDetailLevel;
-		}
-		set {
-			if (firstDetailLevel != value) {
-				firstDetailLevel = value;
-				RefreshSelfOnly();
-			}
-		}
-	}
+    public float WaterSurfaceY {
+        get {
+            return
+                (waterLevel *
+                HexMetrics.elevationStep) + HexMetrics.waterElevationOffset;
+        }
+    }
+    
+    public int FirstDetailLevel {
+        get {
+            return firstDetailLevel;
+        }
+        set {
+            if (firstDetailLevel != value) {
+                firstDetailLevel = value;
+                RefreshSelfOnly();
+            }
+        }
+    }
 
-	public int SecondDetailLevel {
-		get {
-			return secondDetailLevel;
-		}
-		set {
-			if (secondDetailLevel != value) {
-				secondDetailLevel = value;
-				RefreshSelfOnly();
-			}
-		}
-	}
+    public int SecondDetailLevel {
+        get {
+            return secondDetailLevel;
+        }
+        set {
+            if (secondDetailLevel != value) {
+                secondDetailLevel = value;
+                RefreshSelfOnly();
+            }
+        }
+    }
 
-	public int ThirdDetailLevel {
-		get {
-			return thirdDetailLevel;
-		}
-		set {
-			if (thirdDetailLevel != value) {
-				thirdDetailLevel = value;
-				RefreshSelfOnly();
-			}
-		}
-	}
+    public int ThirdDetailLevel {
+        get {
+            return thirdDetailLevel;
+        }
+        set {
+            if (thirdDetailLevel != value) {
+                thirdDetailLevel = value;
+                RefreshSelfOnly();
+            }
+        }
+    }
 
-	public int SpecialIndex {
-		get {
-			return specialIndex;
-		}
-		set {
-			if (specialIndex != value) {
-				specialIndex = value;
-				RefreshSelfOnly();
-			}
-		}
-	}
+    public int SpecialIndex {
+        get {
+            return specialIndex;
+        }
+        set {
+            if (specialIndex != value) {
+                specialIndex = value;
+                RefreshSelfOnly();
+            }
+        }
+    }
 
-	public bool IsSpecial {
-		get {
-			return specialIndex > 0;
-		}
-	}
+    public bool IsSpecial {
+        get {
+            return specialIndex > 0;
+        }
+    }
 
     public HexCell GetNeighbor (HexDirection direction) {
         return neighbors[(int)direction];
     }
 
     public void SetNeighbor (HexDirection direction, HexCell cell) {
-		neighbors[(int)direction] = cell;
+        neighbors[(int)direction] = cell;
         cell.neighbors[(int)direction.Opposite()] = this;
-	}
+    }
 
-	public Vector3 Position {
-		get {
-			return transform.localPosition;
-		}
-	}
+    public Vector3 Position {
+        get {
+            return transform.localPosition;
+        }
+    }
 
-	void Refresh () {
-		if (chunk) {
-			chunk.Refresh();
-			for (int i = 0; i < neighbors.Length; i++) {
-				HexCell neighbor = neighbors[i];
-				if (neighbor != null && neighbor.chunk != chunk) {
-					neighbor.chunk.Refresh();
-				}
-			}
-		}
-	}
+    void Refresh () {
+        if (chunk) {
+            chunk.Refresh();
+            for (int i = 0; i < neighbors.Length; i++) {
+                HexCell neighbor = neighbors[i];
+                if (neighbor != null && neighbor.chunk != chunk) {
+                    neighbor.chunk.Refresh();
+                }
+            }
+        }
+    }
 
-	void RefreshSelfOnly () {
-		chunk.Refresh();
-	}
+    void RefreshSelfOnly () {
+        chunk.Refresh();
+    }
 
-	public void Save (BinaryWriter writer) {
-		writer.Write((byte)terrainTypeIndex);
-		writer.Write((byte)(elevation + 127));
-		writer.Write((byte)waterLevel);
-		writer.Write((byte)firstDetailLevel);
-		writer.Write((byte)secondDetailLevel);
-		writer.Write((byte)thirdDetailLevel);
-		writer.Write((byte)specialIndex);
-	}
+    public void Save (BinaryWriter writer) {
+        writer.Write((byte)terrainTypeIndex);
+        writer.Write((byte)(elevation + 127));
+        writer.Write((byte)waterLevel);
+        writer.Write((byte)firstDetailLevel);
+        writer.Write((byte)secondDetailLevel);
+        writer.Write((byte)thirdDetailLevel);
+        writer.Write((byte)specialIndex);
+    }
 
-	public void Load (BinaryReader reader, int header) {
-		terrainTypeIndex = reader.ReadByte();
-		elevation = reader.ReadByte();
+    public void Load (BinaryReader reader, int header) {
+        terrainTypeIndex = reader.ReadByte();
+        elevation = reader.ReadByte();
         if (header >= 4) {
-			elevation -= 127;
-		}
-		waterLevel = reader.ReadByte();
-		firstDetailLevel = reader.ReadByte();
-		secondDetailLevel = reader.ReadByte();
-		thirdDetailLevel = reader.ReadByte();
-		specialIndex = reader.ReadByte();
+            elevation -= 127;
+        }
+        waterLevel = reader.ReadByte();
+        firstDetailLevel = reader.ReadByte();
+        secondDetailLevel = reader.ReadByte();
+        thirdDetailLevel = reader.ReadByte();
+        specialIndex = reader.ReadByte();
 
-		RefreshPosition();
-	}
+        RefreshPosition();
+    }
 }

@@ -13,17 +13,17 @@ public class HexCubeUnit : MonoBehaviour
     bool stopRotationEvent = true;
     bool rotating = false;
 
-	void OnEnable () {
-		instance = this;
-	}
+    void OnEnable () {
+        instance = this;
+    }
 
     void Update()
     {
         if (rotationDelta != 0f) {
             rotating = true;
-			AdjustSpeed(rotationSpeedDelta);
+            AdjustSpeed(rotationSpeedDelta);
             AdjustRotation(rotationDelta);
-		} else {
+        } else {
             rotating = false;
         }
     }
@@ -37,17 +37,17 @@ public class HexCubeUnit : MonoBehaviour
     }
     public IEnumerator StartRotation (Action<bool> done) {
         instance.stopRotationEvent = false;
-		instance.rotationDelta = 1f;
+        instance.rotationDelta = 1f;
         instance.rotationSpeed = 0f;
         yield return new WaitWhile(() => rotationSpeed < maxRotationSpeed);
         done(true);
-	}
+    }
 
     public IEnumerator StopRotation (Action<bool> done) {
         instance.stopRotationEvent = true;
         yield return new WaitWhile(() => instance.rotating);
         done(true);
-	}
+    }
 
     void AdjustRotation (float delta) {
         rotationAngle += delta * rotationSpeed * Time.deltaTime;
@@ -55,17 +55,17 @@ public class HexCubeUnit : MonoBehaviour
             rotationDelta = 0f;
         }
         if (rotationAngle < 0f) {
-			rotationAngle += 360f;
-		}
-		else if (rotationAngle >= 360f) {
-			rotationAngle -= 360f;
-		}
-		transform.localRotation = Quaternion.Euler(0f, 0f, rotationAngle);
-	}
+            rotationAngle += 360f;
+        }
+        else if (rotationAngle >= 360f) {
+            rotationAngle -= 360f;
+        }
+        transform.localRotation = Quaternion.Euler(0f, 0f, rotationAngle);
+    }
 
     void AdjustSpeed (float delta) {
         if (rotationSpeed < maxRotationSpeed) {
             rotationSpeed += delta * Time.deltaTime;
-		}
-	}
+        }
+    }
 }
