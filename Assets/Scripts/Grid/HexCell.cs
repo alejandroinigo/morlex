@@ -23,7 +23,7 @@ public class HexCell : MonoBehaviour
     int distance;
     int visibility;
 
-    public void Update() {
+    public void FixedUpdate() {
         if (Height != elevation * HexMetrics.elevationStep) {
             RaiseHeight();
         }

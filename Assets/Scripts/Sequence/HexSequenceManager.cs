@@ -6,6 +6,7 @@ using UnityEngine.UI;
 using UnityEngine.EventSystems;
 public class HexSequenceManager : MonoBehaviour
 {   
+    // ### Set Demo to test terrain generation pressing 'C'
     enum Environment {
         Demo, Development, Production
     }
@@ -75,8 +76,8 @@ public class HexSequenceManager : MonoBehaviour
     int delayCubeFade = 3;
     int delayCubeDestroy = 3;
     int maxAcceptedInputs;
-    // ### Autodialog 
-    int delayAutoDialog = 2;
+    // ### Autodialog: Set true to activate automatic answers 
+    int delayAutoDialog = 4;
     bool autoDialog = false;
     int autoDialogTextIndex;
     int autoDialogtypeIndex = 1;
@@ -111,7 +112,7 @@ public class HexSequenceManager : MonoBehaviour
             // hexaoidGenerator.HexaoidClimateEvolution = false;
         } else {
             hexMapSize = 60;
-            maxAcceptedInputs = 10;
+            maxAcceptedInputs = autoDialog ? dialogController.autoDialogText.Count - 1 : 10;
         }
     }
     

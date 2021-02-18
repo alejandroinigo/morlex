@@ -7,7 +7,7 @@ public static class HexMetrics {
     public const float solidFactor = 0.98f;
     public const float blendFactor = 1f - solidFactor;
     public const float elevationStep = 4f;
-    public const float riseTime = 2.0f;
+    public const float riseTime = 1.0f;
     public const float bumpFactor = 0.95f;
     public const float bumpStep = 0.90f;
     public const int chunkSizeX = 5, chunkSizeZ = 5;

@@ -477,7 +477,7 @@ public class HexaoidGenerator : MonoBehaviour
         SinkLand();
     }
 
-    void Update()
+    void FixedUpdate()
     {
         if(HexaoidClimateEvolution) {
             timeSinceLastClimate += Time.deltaTime;
