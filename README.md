@@ -7,7 +7,7 @@ Morlex is an interactive fiction game using an animated hexagon map grid and a s
 ## Concept, Code and Design
 Alejandro Iñigo Rojas
 
-C# programming for Unity 2019.2.5f1
+C# programming for Unity 2020.1.17f1
 
 Contact me at alejandro.inigo@gmail.com
 
